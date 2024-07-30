@@ -1,7 +1,7 @@
 "use client";
 
 import {AuthContext} from "@/contexts/auth-context";
-import {User} from "@/models/User";
+import {User} from "@/models/user";
 import * as React from "react";
 
 export interface AuthProviderProps {
