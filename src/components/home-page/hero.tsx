@@ -12,8 +12,10 @@ import {Button} from "../ui/button";
 
 // Asset imports
 import Placeholder from "../../../public/placeholder.webp";
+import LogOnView from "../log-on-view";
+import LogFirstViewDuration from "../log-first-view-duration";
 
-const Hero = () => {
+export default function Hero() {
   return (
     <Section>
       <Container>
@@ -39,6 +41,8 @@ const Hero = () => {
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </Balancer>
           </h3>
+          <LogFirstViewDuration eventName="landing_page_hero_section_first_view_duration" />
+          <LogOnView eventName="landing_page_hero_section_first_view" />
           <div className="not-prose my-8 h-96 w-full overflow-hidden rounded-lg border md:h-[480px] md:rounded-xl">
             <Image
               className="h-full w-full object-cover object-bottom"
@@ -53,6 +57,4 @@ const Hero = () => {
       </Container>
     </Section>
   );
-};
-
-export default Hero;
+}

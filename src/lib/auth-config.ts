@@ -6,7 +6,7 @@ export const authGetTokensOptions: GetTokensOptions = {
   apiKey: process.env["AUTH_FIREBASE_API_KEY"] as string,
 
   // This needs to be "__session" to work inside Firebase Hosting
-  cookieName: "__session",
+  cookieName: "_session",
 
   cookieSignatureKeys: [
     process.env["AUTH_FIREBASE_COOKIES_SIGNATURE_KEYS"] as string,
@@ -22,8 +22,9 @@ export const authGetTokensOptions: GetTokensOptions = {
 export const authMiddlewareOptions: AuthMiddlewareOptions = {
   ...authGetTokensOptions,
 
-  loginPath: config.auth.loginUrl,
-  logoutPath: config.auth.logoutUrl,
+  loginPath: config.auth.loginPath,
+  logoutPath: config.auth.logoutPath,
+  // refreshTokenPath: config.auth.refreshTokenPath,
   cookieSerializeOptions: {
     path: "/",
     httpOnly: true,
@@ -33,6 +34,6 @@ export const authMiddlewareOptions: AuthMiddlewareOptions = {
     maxAge: 7 * 60 * 60 * 24, // 7 days
   },
   enableMultipleCookies: false,
-  debug: false,
+  debug: process.env.NODE_ENV === "production" ? false : true,
   checkRevoked: true,
 };

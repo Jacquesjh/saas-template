@@ -3,6 +3,7 @@
 import {useAuth} from "@/contexts/auth-context";
 import {signInWithGooglePopUp} from "@/lib/auth";
 import {Button} from "./ui/button";
+import {useRouter} from "next/navigation";
 
 export default function ButtonSignin({
   text = "Get started",
@@ -11,10 +12,12 @@ export default function ButtonSignin({
   extraStyle?: string;
 }) {
   const {user} = useAuth();
+  const router = useRouter();
 
   const handleClick = async () => {
     if (!user) {
       await signInWithGooglePopUp();
+      router.refresh();
     }
   };
 

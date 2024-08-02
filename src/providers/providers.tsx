@@ -2,17 +2,10 @@
 
 import {ReactNode} from "react";
 import {ThemeProvider} from "./theme-provider";
-import {User} from "@/models/user";
 import {AuthProvider} from "./auth-provider";
 import {Toaster} from "sonner";
 
-export function Providers({
-  children,
-  user,
-}: {
-  children: ReactNode;
-  user: User | null;
-}) {
+export function Providers({children}: {children: ReactNode}) {
   return (
     <ThemeProvider
       attribute="class"
@@ -21,7 +14,7 @@ export function Providers({
       disableTransitionOnChange>
       <Toaster />
 
-      <AuthProvider user={user}>{children}</AuthProvider>
+      <AuthProvider>{children}</AuthProvider>
     </ThemeProvider>
   );
 }

@@ -1,3 +1,4 @@
+import CookiesConsent from "@/components/cookies-consent";
 import {Container, Main, Section} from "@/components/craft";
 import CTA from "@/components/home-page/cta";
 import FeatureLeft from "@/components/home-page/feature-left";
@@ -29,6 +30,8 @@ export default function Home() {
           </Container>
         </Section>
       </Main>
+
+      <CookiesConsent />
     </>
   );
 }

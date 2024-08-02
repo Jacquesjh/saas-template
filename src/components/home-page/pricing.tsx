@@ -9,7 +9,8 @@ import config from "@/config";
 import ButtonCheckout from "../button-checkout";
 import {Container, Section} from "../craft";
 import {Button} from "../ui/button";
-import {Badge} from "../ui/badge";
+import LogOnView from "../log-on-view";
+import LogFirstViewDuration from "../log-first-view-duration";
 
 export interface PricingTierFrequency {
   id: string;
@@ -57,6 +58,9 @@ export default function Pricing() {
             </div>
           </div>
         )}
+
+        <LogFirstViewDuration eventName="landing_page_pricing_section_first_view_duration" />
+        <LogOnView eventName="landing_page_pricing_section_first_view" />
 
         <div
           className={cn(

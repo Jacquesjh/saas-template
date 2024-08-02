@@ -1,7 +1,7 @@
 import {getTokens} from "next-firebase-auth-edge";
 import {cookies} from "next/headers";
 import {authGetTokensOptions} from "./auth-config";
-import {getUserById} from "@/data-access/users/get";
+import {server_getUserById} from "@/data-access/server/db/users/get";
 
 export async function getCurrentUser() {
   const tokens = await getTokens(cookies(), authGetTokensOptions);
@@ -10,7 +10,7 @@ export async function getCurrentUser() {
     return null;
   }
 
-  const user = await getUserById(tokens.decodedToken.uid);
+  const user = await server_getUserById(tokens.decodedToken.uid);
 
   return user;
 }

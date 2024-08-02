@@ -15,12 +15,15 @@ import {
 import {signOut} from "@/lib/auth";
 import {toast} from "sonner";
 import {createPortalAction} from "@/actions/authenticated/stripe/create-portal-action";
+import {useRouter} from "next/navigation";
 
 export default function ButtonAccount() {
   const {user} = useAuth();
+  const router = useRouter();
 
   const handleSignOut = async () => {
     await signOut();
+    router.refresh();
   };
 
   const handleBilling = async () => {
@@ -69,12 +72,20 @@ export default function ButtonAccount() {
           <DropdownMenuSeparator />
 
           <DropdownMenuGroup>
-            <DropdownMenuItem onClick={handleBilling}>Billing</DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={handleBilling}
+              className="hover:cursor-pointer hover:bg-muted">
+              Billing
+            </DropdownMenuItem>
           </DropdownMenuGroup>
 
           <DropdownMenuSeparator />
 
-          <DropdownMenuItem onClick={handleSignOut}>Log out</DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={handleSignOut}
+            className="hover:cursor-pointer hover:bg-muted">
+            Log out
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     )

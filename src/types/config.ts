@@ -26,8 +26,9 @@ export interface ConfigProps {
     main: string;
   };
   auth: {
-    loginUrl: string;
-    logoutUrl: string;
+    loginPath: string;
+    logoutPath: string;
+    refreshTokenPath: string;
     callbackUrl: string;
   };
 }

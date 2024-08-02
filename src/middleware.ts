@@ -3,6 +3,8 @@ import {authMiddleware} from "next-firebase-auth-edge";
 
 import {authMiddlewareOptions} from "./lib/auth-config";
 
+// const PUBLIC_PATHS: string[] = [];
+
 export async function middleware(request: NextRequest) {
   return authMiddleware(request, {
     ...authMiddlewareOptions,
@@ -11,9 +13,9 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/api/auth/login",
-    "/api/auth/logout",
     "/",
-    "/((?!_next|favicon.ico|api|.*\\.).*)",
+    "/((?!_next|favicon.ico|__/auth|__/firebase|api|.*\\.).*)",
+    "/api/login",
+    "/api/logout",
   ],
 };

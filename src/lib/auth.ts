@@ -19,7 +19,7 @@ export async function signInWithGooglePopUp() {
   const idToken = await result.user.getIdToken();
 
   // Sets authenticated browser cookies
-  await fetch(config.auth.loginUrl, {
+  await fetch(config.auth.loginPath, {
     headers: {
       Authorization: `Bearer ${idToken}`,
     },
@@ -29,14 +29,24 @@ export async function signInWithGooglePopUp() {
 }
 
 export async function signInEmailPassword(email: string, password: string) {
-  await signInWithEmailAndPassword(clientAuth, email, password);
+  const result = await signInWithEmailAndPassword(clientAuth, email, password);
+
+  // The signed-in user info.
+  const idToken = await result.user.getIdToken();
+
+  // Sets authenticated browser cookies
+  await fetch(config.auth.loginPath, {
+    headers: {
+      Authorization: `Bearer ${idToken}`,
+    },
+  });
 }
 
 export async function signOut() {
   await signOutFirebase(clientAuth);
 
   // Removes authenticated cookies
-  await fetch(config.auth.logoutUrl, {
+  await fetch(config.auth.logoutPath, {
     method: "GET",
   });
 }

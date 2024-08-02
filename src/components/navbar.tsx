@@ -51,7 +51,7 @@ export function NavBar() {
 
   return (
     <div className="flex items-center min-w-full w-full fixed justify-center p-2 z-[50] mt-[2rem]">
-      <div className="flex justify-between md:w-[720px] lg:w-[1024px] w-[95%] border dark:border-zinc-900 bg-opacity-10 relative backdrop-filter backdrop-blur-lg border-white border-opacity-20 rounded-xl p-2 shadow-lg">
+      <div className="flex items-center justify-between md:w-[720px] lg:w-[1024px] w-[95%] border dark:border-zinc-900 bg-opacity-10 relative backdrop-filter backdrop-blur-lg border-white border-opacity-20 rounded-xl p-2 shadow-lg">
         <div className="flex items-center gap-2 min-[825px]:hidden">
           <Link
             href="/"
@@ -65,6 +65,7 @@ export function NavBar() {
               className="transition-all hover:opacity-75 dark:invert"
             />
           </Link>
+
           <Dialog>
             <SheetTrigger className=" p-2 transition">
               <MenuIcon />
@@ -91,8 +92,9 @@ export function NavBar() {
             </SheetContent>
           </Dialog>
         </div>
+
         <NavigationMenu>
-          <NavigationMenuList className="max-[825px]:hidden ">
+          <NavigationMenuList className="max-[825px]:hidden">
             <Link
               href="/"
               className="pl-2 flex items-center gap-2"

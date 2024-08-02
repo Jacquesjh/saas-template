@@ -3,10 +3,9 @@ import {headers} from "next/headers";
 import Stripe from "stripe";
 import configFile from "@/config";
 import {findCheckoutSession} from "@/lib/stripe";
-import {getUserByAttribute, getUserById} from "@/data-access/users/get";
-import {createUser} from "@/data-access/users/create";
-import {User} from "@/models/user";
-import {updateUser} from "@/data-access/users/update";
+import {server_createUserAuth} from "@/data-access/server/auth/createUser";
+import {server_updateUser} from "@/data-access/server/db/users/update";
+import {server_getUserByAttribute} from "@/data-access/server/db/users/get";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
   typescript: true,
@@ -52,7 +51,9 @@ export async function POST(req: NextRequest) {
 
         const customerId = session?.customer as string | undefined;
         const priceId = session?.line_items?.data[0]?.price?.id;
-        const plan = configFile.stripe.plans.find((p) => p.priceId === priceId);
+        const plan = configFile.stripe.plans.find((plan) =>
+          plan.priceIds.find((p) => p.priceId === priceId)
+        );
         let userId = stripeObject.client_reference_id;
 
         if (!plan) break;
@@ -64,12 +65,18 @@ export async function POST(req: NextRequest) {
         // Get or create the user. userId is normally pass in the checkout session (clientReferenceID) to identify the user when we get the webhook event
         if (!userId) {
           if (customer.email) {
-            const user = await getUserByAttribute("email", customer.email);
+            const user = await server_getUserByAttribute(
+              "email",
+              customer.email
+            );
 
             if (user) {
               userId = user.uid;
             } else {
-              userId = await createUser(customer.email, customer.name || "");
+              userId = await server_createUserAuth(
+                customer.email,
+                customer.name || ""
+              );
             }
           } else {
             console.error("No user found");
@@ -77,8 +84,12 @@ export async function POST(req: NextRequest) {
           }
         }
 
+        if (!userId) {
+          return;
+        }
+
         // Update user data + Grant user access to your product. It's a boolean in the database, but could be a number of credits, etc...
-        await updateUser(userId, {
+        await server_updateUser(userId, {
           customerId: customerId,
           hasAccess: true,
           priceId: priceId,
@@ -117,7 +128,7 @@ export async function POST(req: NextRequest) {
           stripeObject.id
         );
 
-        const user = await getUserByAttribute(
+        const user = await server_getUserByAttribute(
           "customerId",
           subscription.customer
         );
@@ -128,7 +139,7 @@ export async function POST(req: NextRequest) {
 
         // Revoke access to your product
         user.hasAccess = false;
-        await updateUser(user.uid, user);
+        await server_updateUser(user.uid, user);
 
         break;
       }
@@ -143,7 +154,7 @@ export async function POST(req: NextRequest) {
         const priceId = stripeObject.lines.data[0].price?.id;
         const customerId = stripeObject.customer;
 
-        const user = await getUserByAttribute("customerId", customerId);
+        const user = await server_getUserByAttribute("customerId", customerId);
 
         if (!user) {
           return null;
@@ -154,7 +165,7 @@ export async function POST(req: NextRequest) {
 
         // Grant user access to your product. It's a boolean in the database, but could be a number of credits, etc...
         user.hasAccess = false;
-        await updateUser(user.uid, user);
+        await server_updateUser(user.uid, user);
 
         break;
       }

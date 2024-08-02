@@ -9,6 +9,8 @@ import {Button} from "@/components/ui/button";
 
 // Custom components
 import {Section, Container} from "@/components/craft";
+import LogFirstViewDuration from "../log-first-view-duration";
+import LogOnView from "../log-on-view";
 
 const CTA = () => {
   return (
@@ -21,6 +23,9 @@ const CTA = () => {
             labore et dolore magna aliqua.
           </Balancer>
         </h3>
+
+        <LogFirstViewDuration eventName="landing_page_cta_section_first_view_duration" />
+        <LogOnView eventName="landing_page_cta_section_first_view" />
         <div className="not-prose mx-auto flex items-center gap-2">
           <Button className="w-fit" asChild>
             <Link href="#">Get Started</Link>

@@ -3,8 +3,8 @@ import {Inter} from "next/font/google";
 import "./globals.css";
 import {Providers} from "@/providers/providers";
 import config from "@/config";
-import {getCurrentUser} from "@/lib/session";
 import {getSEOTags} from "@/lib/seo";
+import {getCurrentUser} from "@/lib/session";
 
 const font = Inter({subsets: ["latin"]});
 
@@ -26,11 +26,16 @@ export default async function RootLayout({
 }>) {
   // This makes the user accessible accross the entire application
   const user = await getCurrentUser();
+  console.log("server user: ", user);
 
   return (
-    <html lang="en" data-theme={config.colors.theme} className={font.className}>
+    <html
+      lang="en"
+      data-theme={config.colors.theme}
+      className={font.className}
+      suppressHydrationWarning>
       <body>
-        <Providers user={user}>{children}</Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
