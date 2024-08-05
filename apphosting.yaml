@@ -1,0 +1,97 @@
+# Settings for Cloud Run
+runConfig:
+  minInstances: 0
+  maxInstances: 10
+  concurrency: 10
+  cpu: 1
+  memoryMiB: 1024
+
+# Environment variables and secrets
+
+# To add new secrets use the following command:
+# firebase --project <project_id> apphosting:secrets:set <secretName>
+# firebase --project <project_id> apphosting:secrets:set NextAuthSecret
+# !! Secret names like this: SECRET_NAME do NOT seem to work
+env:
+  - variable: NODE_ENV
+    value: "production"
+    availability:
+      - RUNTIME
+
+  # -----------------------------------------------------------------------------
+  # Google OAuth: https://shipfa.st/docs/features/google-oauth
+  # -----------------------------------------------------------------------------
+  - variable: GOOGLE_ID
+    secret: GoogleId
+  - variable: GOOGLE_SECRET
+    secret: GoogleSecret
+
+  # -----------------------------------------------------------------------------
+  # Mailgun: https://shipfa.st/docs/features/emails
+  # -----------------------------------------------------------------------------
+  # - variable: EMAIL_SERVER
+  #   secret: EmailServer
+  # - variable: MAILGUN_API_KEY
+  #   secret: MailGunApiKey
+
+  # # -----------------------------------------------------------------------------
+  # # Stripe: https://shipfa.st/docs/features/payments
+  # # -----------------------------------------------------------------------------
+  # - variable: STRIPE_PUBLIC_KEY
+  #   secret: StripePublicKey
+
+  # - variable: STRIPE_SECRET_KEY
+  #   secret: StripeSecretKey
+
+  # - variable: STRIPE_WEBHOOK_SECRET
+  #   secret: StripeWebhookSecret
+
+  # -----------------------------------------------------------------------------
+  # Firebase Admin SDK
+  # -----------------------------------------------------------------------------
+
+  # ---------- SAFE TO EXPOSE ----------
+  - variable: AUTH_API_KEY
+    value: "AIzaSyDhPOuhIfGz-avDy2ldIjZfJMHvZTohFzI"
+
+  - variable: AUTH_PROJECT_ID
+    value: "saas-template-739eb"
+
+  - variable: AUTH_COOKIES_SECURE
+    value: "true"
+
+  # ------------- SECRETS --------------
+  - variable: AUTH_CLIENT_EMAIL
+    secret: AuthFirebaseClientEmail
+
+  - variable: AUTH_PRIVATE_KEYS
+    secret: AuthFirebasePrivateKeys
+
+  - variable: AUTH_COOKIES_SIGNATURE_KEYS
+    secret: AuthFirebaseCookiesSignatureKeys
+  # -----------------------------------
+
+  # -----------------------------------------------------------------------------
+  # Firebase Client SDK (safe to expose) - NEEDED FOR npm run dev
+  # -----------------------------------------------------------------------------
+  - variable: NEXT_PUBLIC_FIREBASE_API_KEY
+    value: "AIzaSyDhPOuhIfGz-avDy2ldIjZfJMHvZTohFzI"
+
+  - variable: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
+    value: "saas-template-739eb.firebaseapp.com"
+
+  - variable: NEXT_PUBLIC_FIREBASE_PROJECT_ID
+    value: "saas-template-739eb"
+
+  - variable: NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
+    value: "saas-template-739eb.appspot.com"
+
+  - variable: NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
+    value: "919204756186"
+
+  - variable: NEXT_PUBLIC_FIREBASE_APP_ID
+    value: "1:919204756186:web:9d28d47cec8a8c7c3183e3"
+
+  - variable: NEXT_PUBLIC_FIREBASE_MEASURMENT_ID
+    value: "G-JE6HW1WGDN"
+  # ------------------------------------
