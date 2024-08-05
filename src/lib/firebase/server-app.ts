@@ -12,10 +12,7 @@ function createApp() {
     credential: cert({
       projectId: process.env["AUTH_PROJECT_ID"] as string,
       clientEmail: process.env["AUTH_CLIENT_EMAIL"] as string,
-      privateKey: process.env["AUTH_PRIVATE_KEYS"]!.replace(
-        /\\n/g,
-        "\n"
-      ) as string,
+      privateKey: process.env["AUTH_PRIVATE_KEYS"]!.replace(/\\n/g, "\n")!,
     }),
   };
 

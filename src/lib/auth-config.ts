@@ -13,7 +13,7 @@ export const authGetTokensOptions: GetTokensOptions = {
   serviceAccount: {
     projectId: process.env["AUTH_PROJECT_ID"] as string,
     clientEmail: process.env["AUTH_CLIENT_EMAIL"] as string,
-    privateKey: process.env["AUTH_PRIVATE_KEYS"] as string,
+    privateKey: process.env["AUTH_PRIVATE_KEYS"]!.replace(/\\n/g, "\n")!,
   },
 };
 
