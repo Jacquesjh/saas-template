@@ -10,13 +10,13 @@ function createApp() {
 
   const options: AppOptions = {
     credential: cert({
-      projectId: process.env["AUTH_PROJECT_ID"] as string,
+      projectId: process.env["NEXT_PUBLIC_FIREBASE_PROJECT_ID"] as string,
       clientEmail: process.env["AUTH_CLIENT_EMAIL"] as string,
       privateKey: process.env["AUTH_PRIVATE_KEYS"]!.replace(/\\n/g, "\n")!,
     }),
   };
 
-  if (process.env.NODE_ENV === "test") {
+  if (process.env.NODE_ENV === "development") {
     // For firestore
     process.env["FIRESTORE_EMULATOR_HOST"] = "127.0.0.1:8080";
 

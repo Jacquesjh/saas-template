@@ -50,16 +50,6 @@ env:
   # Firebase Admin SDK
   # -----------------------------------------------------------------------------
 
-  # ---------- SAFE TO EXPOSE ----------
-  - variable: AUTH_API_KEY
-    value: "AIzaSyDhPOuhIfGz-avDy2ldIjZfJMHvZTohFzI"
-
-  - variable: AUTH_PROJECT_ID
-    value: "saas-template-739eb"
-
-  - variable: AUTH_COOKIES_SECURE
-    value: "true"
-
   # ------------- SECRETS --------------
   - variable: AUTH_CLIENT_EMAIL
     secret: AuthFirebaseClientEmail
