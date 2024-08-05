@@ -85,7 +85,7 @@ export async function POST(req: NextRequest) {
         }
 
         if (!userId) {
-          return;
+          break;
         }
 
         // Update user data + Grant user access to your product. It's a boolean in the database, but could be a number of credits, etc...
@@ -134,7 +134,7 @@ export async function POST(req: NextRequest) {
         );
 
         if (!user) {
-          return null;
+          break;
         }
 
         // Revoke access to your product
@@ -157,7 +157,7 @@ export async function POST(req: NextRequest) {
         const user = await server_getUserByAttribute("customerId", customerId);
 
         if (!user) {
-          return null;
+          break;
         }
 
         // Make sure the invoice is for the same plan (priceId) the user subscribed to
