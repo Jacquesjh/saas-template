@@ -27,7 +27,7 @@ export const AuthProvider: React.FunctionComponent<AuthProviderProps> = ({
 
       // No user logged in
       if (!user) {
-        setUser(user);
+        setUser(null);
         return;
       }
 

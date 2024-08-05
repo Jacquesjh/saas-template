@@ -1,4 +1,5 @@
-import {adminAuth} from "@/lib/firebase/server-app";
+import {adminFirebase} from "@/lib/firebase/server-app";
+import {getAuth} from "firebase-admin/auth";
 
 // !
 // This will create a new user on Firebase Auth
@@ -8,7 +9,8 @@ export async function server_createUserAuth(
   email: string,
   displayName: string
 ) {
-  const user = await adminAuth.createUser({
+  const auth = getAuth(adminFirebase);
+  const user = await auth.createUser({
     displayName: displayName,
     email: email,
   });

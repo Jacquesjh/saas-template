@@ -1,9 +1,11 @@
-import {adminDb} from "@/lib/firebase/server-app";
+import {adminFirebase} from "@/lib/firebase/server-app";
 import {User} from "@/models/user";
+import {getFirestore} from "firebase-admin/firestore";
 
 export async function server_getUserById(userId: string) {
   // Get the user document reference
-  const userDocRef = adminDb.collection("users").doc(userId);
+  const db = getFirestore(adminFirebase);
+  const userDocRef = db.collection("users").doc(userId);
 
   // Fetch the document
   const userDoc = await userDocRef.get();
@@ -21,8 +23,9 @@ export async function server_getUserByAttribute(
   attribute: keyof User,
   value: any
 ) {
+  const db = getFirestore(adminFirebase);
   // Query the users collection to find the document with the specified attribute and value
-  const userQuery = adminDb.collection("users").where(attribute, "==", value);
+  const userQuery = db.collection("users").where(attribute, "==", value);
   const querySnapshot = await userQuery.get();
 
   // If no matching documents are found, return null
