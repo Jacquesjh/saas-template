@@ -17,4 +17,5 @@ jobs:
         with:
           args: deploy --only firestore
         env:
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SAAS_TEMPLATE_739EB }}
+          PROJECT_ID: saas-template-739eb
+          GCP_SA_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SAAS_TEMPLATE_739EB }}
