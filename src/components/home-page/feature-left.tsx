@@ -3,16 +3,16 @@ import Image from "next/image";
 import Link from "next/link";
 
 // UI component imports
-import * as Craft from "@/components/craft";
 import {Button} from "@/components/ui/button";
 
 // Asset imports
 import Placeholder from "../../../public/placeholder.webp";
+import {Container, Section} from "../craft";
 
 const FeatureLeft = () => {
   return (
-    <Craft.Section>
-      <Craft.Container className="grid items-stretch md:grid-cols-2 md:gap-12">
+    <Section>
+      <Container className="grid items-stretch md:grid-cols-2 md:gap-12">
         <div className="not-prose relative flex h-96 overflow-hidden rounded-lg border">
           <Image
             src={Placeholder}
@@ -35,8 +35,8 @@ const FeatureLeft = () => {
             </Button>
           </div>
         </div>
-      </Craft.Container>
-    </Craft.Section>
+      </Container>
+    </Section>
   );
 };
 

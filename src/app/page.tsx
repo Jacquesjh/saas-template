@@ -8,11 +8,14 @@ import Footer from "@/components/home-page/footer";
 import Hero from "@/components/home-page/hero";
 import Pricing from "@/components/home-page/pricing";
 import {NavBar} from "@/components/navbar";
+import {BackgroundBeams} from "@/components/ui/background-beams";
 import {Suspense} from "react";
 
 export default function Home() {
   return (
     <>
+      <BackgroundBeams />
+
       <Suspense>
         <NavBar />
       </Suspense>

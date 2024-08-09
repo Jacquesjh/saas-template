@@ -27,6 +27,8 @@ export const clientAnalytics = isSupported().then((yes) =>
 if (process.env.NODE_ENV === "development") {
   console.log("Connecting Firebase Emulators...");
 
-  connectAuthEmulator(clientAuth, "http://127.0.0.1:9099");
+  connectAuthEmulator(clientAuth, "http://127.0.0.1:9099", {
+    disableWarnings: true,
+  });
   connectFirestoreEmulator(clientDb, "127.0.0.1", 8080);
 }

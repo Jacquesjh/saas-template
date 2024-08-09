@@ -11,6 +11,7 @@ import {Container, Section} from "../craft";
 import {Button} from "../ui/button";
 import LogOnView from "../log-on-view";
 import LogFirstViewDuration from "../log-first-view-duration";
+import Balancer from "react-wrap-balancer";
 
 export interface PricingTierFrequency {
   id: string;
@@ -31,15 +32,13 @@ export default function Pricing() {
 
   return (
     <Section className="px-4">
-      <Container className="flex flex-col items-center gap-6 p-6 md:rounded-xl md:p-12">
-        <div className="w-full lg:w-auto mx-auto max-w-4xl lg:text-center">
-          <h1 className="text-black dark:text-white text-4xl font-semibold max-w-xs sm:max-w-none md:text-6xl !leading-tight">
-            Pricing
-          </h1>
-          <p className="text-black dark:text-white mt-6 md:text-xl lg:text-center max-w-prose">
-            It fits your needs. Whatever they are
-          </p>
-        </div>
+      <Container className="flex flex-col items-center gap-1 p-6 md:rounded-xl md:p-12">
+        <h3 className="text-4xl">
+          <Balancer>Pricing</Balancer>
+        </h3>
+        <h4 className="text-2xl font-light opacity-70">
+          <Balancer>It fits your needs. Whatever they are.</Balancer>
+        </h4>
 
         {frequencies.length > 1 && (
           <div className="mt-16 flex justify-center">
