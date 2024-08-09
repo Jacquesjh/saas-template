@@ -1,6 +1,7 @@
 import config from "@/config";
 import {AuthMiddlewareOptions} from "next-firebase-auth-edge/lib/next/middleware";
 import {GetTokensOptions} from "next-firebase-auth-edge/lib/next/tokens";
+import {adminServiceAccount} from "./firebase/server-app";
 
 export const authGetTokensOptions: GetTokensOptions = {
   apiKey: process.env["NEXT_PUBLIC_FIREBASE_API_KEY"] as string,
@@ -10,11 +11,7 @@ export const authGetTokensOptions: GetTokensOptions = {
 
   cookieSignatureKeys: [process.env["AUTH_COOKIES_SIGNATURE_KEYS"] as string],
 
-  serviceAccount: {
-    projectId: process.env["NEXT_PUBLIC_FIREBASE_PROJECT_ID"] as string,
-    clientEmail: process.env["AUTH_CLIENT_EMAIL"] as string,
-    privateKey: process.env["AUTH_PRIVATE_KEYS"]!.replace(/\\n/g, "\n")!,
-  },
+  serviceAccount: adminServiceAccount,
 };
 
 export const authMiddlewareOptions: AuthMiddlewareOptions = {
@@ -23,7 +20,7 @@ export const authMiddlewareOptions: AuthMiddlewareOptions = {
   loginPath: config.auth.loginPath,
   logoutPath: config.auth.logoutPath,
   // refreshTokenPath: "/api/refresh",
-  // refreshTokenPath: config.auth.refreshTokenPath,
+  refreshTokenPath: config.auth.refreshTokenPath,
   cookieSerializeOptions: {
     path: "/",
     httpOnly: true,

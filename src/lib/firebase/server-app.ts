@@ -1,5 +1,11 @@
 import {AppOptions, cert, getApps, initializeApp} from "firebase-admin/app";
 
+export const adminServiceAccount = {
+  projectId: process.env["AUTH_API_KEY"] as string,
+  clientEmail: process.env["AUTH_CLIENT_EMAIL"] as string,
+  privateKey: process.env["AUTH_PRIVATE_KEYS"]!.replace(/\\n/g, "\n")!,
+};
+
 function createApp() {
   const apps = getApps();
 
@@ -9,11 +15,7 @@ function createApp() {
   }
 
   const options: AppOptions = {
-    credential: cert({
-      projectId: process.env["NEXT_PUBLIC_FIREBASE_PROJECT_ID"] as string,
-      clientEmail: process.env["AUTH_CLIENT_EMAIL"] as string,
-      privateKey: process.env["AUTH_PRIVATE_KEYS"]!.replace(/\\n/g, "\n")!,
-    }),
+    credential: cert(adminServiceAccount),
   };
 
   if (process.env.NODE_ENV === "development") {
