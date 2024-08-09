@@ -1,3 +1,6 @@
+# Requires Role:
+# - Firebase Rules Firestore Service Agent
+
 name: Deploy Firestore Rules and Indexes
 
 on:
