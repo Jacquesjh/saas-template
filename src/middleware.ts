@@ -24,8 +24,8 @@ export const config = {
   matcher: [
     "/",
     "/((?!_next|favicon.ico|__/auth|__/firebase|api|.*\\.).*)",
-    authMiddlewareOptions.loginPath,
-    authMiddlewareOptions.logoutPath,
-    authMiddlewareOptions.refreshTokenPath,
+    "/api/login",
+    "/api/logout",
+    "/api/refresh-token",
   ],
 };
