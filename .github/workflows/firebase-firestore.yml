@@ -1,3 +1,14 @@
+# Requires the permission :
+# - Cloud Datastore Owner
+# - Firebase Rules Admin
+#
+# For service account: github-action...
+
+# And:
+# - Cloud Datastore Index Admin
+# - Firebase Rules Admin
+# To the service account firebase-adminsdk-...
+
 name: Deploy Firestore Rules and Indexes
 on:
   push:
