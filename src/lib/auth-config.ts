@@ -11,7 +11,7 @@ export const authGetTokensOptions: GetTokensOptions = {
   cookieSignatureKeys: [process.env["AUTH_COOKIES_SIGNATURE_KEYS"] as string],
 
   serviceAccount: {
-    projectId: process.env["AUTH_API_KEY"] as string,
+    projectId: process.env["AUTH_PROJECT_ID"] as string,
     clientEmail: process.env["AUTH_CLIENT_EMAIL"] as string,
     privateKey: process.env["AUTH_PRIVATE_KEYS"]!.replace(/\\n/g, "\n")!,
   },
