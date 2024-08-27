@@ -49,7 +49,10 @@ export default function Pricing() {
                   variant={
                     f.label === frequency.label ? "outline" : "secondary"
                   }
-                  className="border-0 w-36 font-semibold"
+                  className={cn(
+                    "border-0 w-36 font-semibold",
+                    frequency.id === f.id && "hover:bg-background"
+                  )}
                   onClick={() => setFrequency(f)}>
                   {f.label}
                 </Button>
