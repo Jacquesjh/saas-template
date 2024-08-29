@@ -3,7 +3,7 @@ name: Deploy Firebase Functions
 on:
   push:
     branches:
-      - main # Change this to your desired branch
+      - master # Change this to your desired branch
 
 jobs:
   deploy:
