@@ -1,21 +1,23 @@
 import {
+  getAdditionalUserInfo,
   GoogleAuthProvider,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut as signOutFirebase,
+  UserCredential,
 } from "firebase/auth";
 import {clientAuth} from "./firebase/client-app";
 import config from "@/config";
+import {logAnalyticsEvent} from "./analytics";
 
-export async function signInWithGooglePopUp() {
-  const provider = new GoogleAuthProvider();
+async function handleAuthResult(result: UserCredential) {
+  const additionalUserInfo = getAdditionalUserInfo(result);
+  const isNewUser = additionalUserInfo?.isNewUser;
 
-  // provider.addScope("https://www.googleapis.com/auth/calendar.readonly");
+  await logAnalyticsEvent(isNewUser ? "sign_up" : "login", {
+    method: result.providerId,
+  });
 
-  // Pops up a signin window. The user will either be a new user or an existing one
-  const result = await signInWithPopup(clientAuth, provider);
-
-  // The signed-in user info.
   const idToken = await result.user.getIdToken();
 
   // Sets authenticated browser cookies
@@ -28,18 +30,16 @@ export async function signInWithGooglePopUp() {
   return result;
 }
 
+export async function signInWithGooglePopUp() {
+  const provider = new GoogleAuthProvider();
+  const result = await signInWithPopup(clientAuth, provider);
+
+  return handleAuthResult(result);
+}
+
 export async function signInEmailPassword(email: string, password: string) {
   const result = await signInWithEmailAndPassword(clientAuth, email, password);
-
-  // The signed-in user info.
-  const idToken = await result.user.getIdToken();
-
-  // Sets authenticated browser cookies
-  await fetch(config.auth.loginPath, {
-    headers: {
-      Authorization: `Bearer ${idToken}`,
-    },
-  });
+  return handleAuthResult(result);
 }
 
 export async function signOut() {

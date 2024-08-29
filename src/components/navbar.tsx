@@ -25,6 +25,7 @@ import config from "@/config";
 import {useAuth} from "@/contexts/auth-context";
 import ButtonSignin from "./button-signin";
 import ButtonAccount from "./button-account";
+import {User} from "@/models/user";
 
 const links: {
   href: string;
@@ -44,10 +45,12 @@ const links: {
   },
 ];
 
-export function NavBar() {
-  const {user} = useAuth();
-
-  const cta: JSX.Element = user ? <ButtonAccount /> : <ButtonSignin />;
+export function NavBar({user}: {user: User | null}) {
+  const cta: JSX.Element = user ? (
+    <ButtonAccount user={user} />
+  ) : (
+    <ButtonSignin />
+  );
 
   return (
     <div className="flex items-center min-w-full w-full fixed justify-center p-2 z-[50] mt-[2rem]">

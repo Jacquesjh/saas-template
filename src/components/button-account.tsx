@@ -16,9 +16,9 @@ import {signOut} from "@/lib/auth";
 import {toast} from "sonner";
 import {createPortalAction} from "@/actions/authenticated/stripe/create-portal-action";
 import {useRouter} from "next/navigation";
+import {User} from "@/models/user";
 
-export default function ButtonAccount() {
-  const {user} = useAuth();
+export default function ButtonAccount({user}: {user: User}) {
   const router = useRouter();
 
   const handleSignOut = async () => {

@@ -9,15 +9,18 @@ import Hero from "@/components/home-page/hero";
 import Pricing from "@/components/home-page/pricing";
 import {NavBar} from "@/components/navbar";
 import {BackgroundBeams} from "@/components/ui/background-beams";
+import {getCurrentUser} from "@/lib/session";
 import {Suspense} from "react";
 
-export default function Home() {
+export default async function Home() {
+  const user = await getCurrentUser();
+
   return (
     <>
       <BackgroundBeams />
 
       <Suspense>
-        <NavBar />
+        <NavBar user={user} />
       </Suspense>
 
       <Main>

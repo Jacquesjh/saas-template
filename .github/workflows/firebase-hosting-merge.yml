@@ -24,10 +24,6 @@ jobs:
         run: |
           echo "NODE_ENV=production" >> .env
 
-          echo "GOOGLE_ID=${{ secrets.GOOGLE_ID }}" >> .env
-          echo "GOOGLE_SECRET=${{ secrets.GOOGLE_SECRET }}" >> .env
-
-
           echo "AUTH_API_KEY=AIzaSyDhPOuhIfGz-avDy2ldIjZfJMHvZTohFzI" >> .env
           echo "AUTH_PROJECT_ID=saas-template-739eb" >> .env
           echo "AUTH_COOKIES_SECURE=true" >> .env

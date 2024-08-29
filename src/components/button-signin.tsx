@@ -13,6 +13,7 @@ export default function ButtonSignin({
 }) {
   const {user} = useAuth();
   const router = useRouter();
+  console.log(user);
 
   const handleClick = async () => {
     if (!user) {
