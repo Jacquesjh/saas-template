@@ -9,11 +9,6 @@ export interface ConfigProps {
   stripe: {
     plans: StripePlanProps[];
   };
-  aws?: {
-    bucket?: string;
-    bucketUrl?: string;
-    cdn?: string;
-  };
   mailgun: {
     subdomain: string;
     fromNoReply: string;

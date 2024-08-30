@@ -22,7 +22,6 @@ import ModeToggle from "./mode-toggle";
 import Image from "next/image";
 import Logo from "../../public/next.svg";
 import config from "@/config";
-import {useAuth} from "@/contexts/auth-context";
 import ButtonSignin from "./button-signin";
 import ButtonAccount from "./button-account";
 import {User} from "@/models/user";

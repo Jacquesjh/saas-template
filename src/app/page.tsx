@@ -15,7 +15,6 @@ import {Suspense} from "react";
 export default async function Home() {
   const user = await getCurrentUser();
 
-  // TODO: remove this
   return (
     <>
       <BackgroundBeams />
